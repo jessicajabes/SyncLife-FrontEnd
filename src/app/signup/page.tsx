@@ -4,6 +4,9 @@ import Image from 'next/image'
 import Link from "next/link";
 import {api} from '@/services/api'
 import { redirect } from "next/navigation";
+import {Logo} from '../components/Logo'
+import {Button} from '../components/Button'
+import { Input } from '../components/Input'
 
 export default function Signup(){
 
@@ -36,21 +39,14 @@ export default function Signup(){
 
     return(
         <div className={styles.containerCenter}>
-        <Image 
-          src={logoImg}
-          alt="Logo SyncLife"
-          className={styles.Image}
-        />
+        <Link href="/" className={styles.logoLink}><Logo/></Link>
         <section className={styles.Login}>
           <h1>Faça seu cadastro</h1>  
           <form action={handleRegister}>
-          <input type="text" required name="name" placeholder="Digite seu nome..." className={styles.input}/>
-            <input type="email" required name="email" placeholder="Digite seu email..." className={styles.input}/>
-            <input type="password" required name="password" placeholder="Digite sua senha..." className={styles.input}/>
-         
-            <button type="submit">
-              Cadastrar
-            </button>
+            <Input type="text" name="name" placeholder="Digite seu nome..."/>
+            <Input type="email" name="email" placeholder="Digite seu email..." />
+            <Input type="password" name="password" placeholder="Digite sua senha..."/>
+            <Button>Cadastrar</Button>
           </form>
           <Link href="/" className={styles.text}>
           Já possui uma conta? Faça o login

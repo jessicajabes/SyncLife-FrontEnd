@@ -4,6 +4,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+}
+.logoLink{
+  text-decoration: none;
+}
+.logoLink:hover{
+  filter: brightness(50%)
 }
 
 .h1{
@@ -11,12 +18,6 @@
 
 }
 
-.Image {
-  max-width:  400px;
-  max-height:300px;
-  width: auto;
-  height: auto;
-}
 
 .Login{
   margin-top:24px;
@@ -28,56 +29,34 @@
   width: 600px;
   h1{
     font-size: 40px;
-    color: var(--white);
+    color: var(--text-default);
     font-weight: bold;
 
   }
+  a{
+    color: var(--text-default);
+    text-decoration: none;
+    font-size: 20px;
+  }
+  a:hover{
+    filter: brightness(50%)
+  }
 
   form{
-    color: var(--white);
+    color: var(--text-default);
     padding-bottom: 16px;
     font-size:50px;
     display: flex;
     flex-direction: column;
     width: 90%;
     gap:16px;
+
+
   }
-  form button{
-    height: 40px;
-    font-size: 16px;
-    border-radius:8px;
-    background-color:var(--aquamarine);
-    border:1px solid var(--black);
-    color: var(--black3);
-    font-weight: bold;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s;
-  }
-  form button:hover{
-    transform: scale(1.05);
-  }
-}
-.input{
-  height: 40px;
-  border:1px solid var(--gray-100);
-  padding:0 16px;
-  border-radius:8px;
-  background-color: var(--white);
-  color: var(--black);
-  font-size: 16px;
+
 }
 
-.input::placeholder{
-  color: var(--gray-100);
-}
 
-.text{
-  color: var(--white);
-  text-decoration: none;
-  font-size: 20px;
-}
 
 @media (max-width: 620px){
   .Login{
