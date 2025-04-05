@@ -4,6 +4,8 @@ import {GetExercises} from './components/GetExercicios';
 import { getCookieServer } from '@/lib/cookieServer';
 import { api } from '@/services/api';
 import { ExerciseContextProvider } from './context/ExerciseContextProvider';
+import { ExerciseModel } from '@/app/models/ExerciseModel';
+import { ExerciceStateModel } from '@/app/models/ExerciseStateModel';
 
 
 
@@ -16,9 +18,12 @@ export default async function Exercice(){
               Authorization: `Bearer ${token}`
             }
      })
-    //console.log(response.data);
+    const exercisesResponse: ExerciceStateModel ={
+      exercises:response.data
+    }
+
     return(
-      <ExerciseContextProvider exercise={response.data}>
+      <ExerciseContextProvider exercise={exercisesResponse}>
           <main className={styles.container}>
             <FormExercice/>
             <GetExercises exercises={response.data}/>

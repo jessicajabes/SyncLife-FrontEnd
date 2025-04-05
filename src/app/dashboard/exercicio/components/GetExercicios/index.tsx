@@ -6,6 +6,7 @@ import {X} from 'lucide-react'
 import {Pen} from 'lucide-react'
 import { useExerciseContext } from '../../context/useExerciseContext'
 import { ExerciseActionTypes } from '../../context/ExerciseActions'
+import { ExerciseModel } from '@/app/models/ExerciseModel'
 
 
 
@@ -25,8 +26,13 @@ interface Props{
 export function GetExercises({exercises}: Props){
 
     const {state, dispatch} = useExerciseContext();
-    console.log('CONSOLE DO COMPONENTE GET- state',state)
-    console.log('CONSOLE DO COMPONENTE GET- exercises',exercises)
+    const exercisess: ExerciseModel[]=state.exercises;
+    exercisess?.map(item=>{
+        console.log("VAMO VER",item.id_exercise);
+    });
+
+    console.log('CONSOLE DO COMPONENTE GET- state',state.exercises);
+    console.log('CONSOLE DO COMPONENTE GET- exercises',exercises);
 
     function handleGetExercise(){
       //  dispatch({type:ExerciseActionTypes.GET_EXERCISE});

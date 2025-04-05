@@ -5,6 +5,7 @@ import { ExerciseContext } from "./ExerciseContext";
 import { exerciseReducer } from "./exerciseReducer";
 import { GetExercice, initialExerciseState } from "./initialExerciseState";
 import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
+import { ExerciseModel } from "@/app/models/ExerciseModel";
 
 type ExerciseContextProviderProps = {
     children: React.ReactNode,
