@@ -11,7 +11,12 @@ type ExerciseContextProviderProps = {
     exercise: ExerciceStateModel;
   };
   
+
+
+
+
   export function ExerciseContextProvider({ children, exercise }: ExerciseContextProviderProps) {
+
     const [state, dispatch] = useReducer(exerciseReducer, exercise);
     console.log(state);
     return(
