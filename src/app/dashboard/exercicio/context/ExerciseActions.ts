@@ -7,7 +7,7 @@ export enum ExerciseActionTypes {
     CREATE_EXERCISE = 'CREATE EXERCISE',
   }
 
-type ExerciseActionsWithPayload =
+type ExerciseActionsWithPayload = 
    |{
     type: ExerciseActionTypes.CREATE_EXERCISE;
     payload: ExerciseModel;
@@ -18,6 +18,7 @@ type ExerciseActionsWithPayload =
     type: ExerciseActionTypes.DELETE_EXERCISE;
     payload: ExerciseModel['id_exercise'];
   };
+  
 
 type ExerciseActionsWithoutPayload =
   {

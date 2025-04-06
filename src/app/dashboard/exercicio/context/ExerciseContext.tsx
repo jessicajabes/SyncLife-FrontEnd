@@ -1,3 +1,4 @@
+"use client"
 import { createContext } from "react";
 import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
 import { initialExerciseState } from "./initialExerciseState";

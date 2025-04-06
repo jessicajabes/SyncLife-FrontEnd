@@ -20,28 +20,14 @@ interface Props{
     exercises: ExerciceProps[]
 }
 
-
-
-
-export function GetExercises({exercises}: Props){
+export function GetExercises(){
 
     const {state, dispatch} = useExerciseContext();
-    const exercisess: ExerciseModel[]=state.exercises;
-    exercisess?.map(item=>{
-        console.log("VAMO VER",item.id_exercise);
-    });
-
-    console.log('CONSOLE DO COMPONENTE GET- state',state.exercises);
-    console.log('CONSOLE DO COMPONENTE GET- exercises',exercises);
-
-    function handleGetExercise(){
-      //  dispatch({type:ExerciseActionTypes.GET_EXERCISE});
-    }
-    
+  
     return(
         
-       exercises.map((item,index) =>(
-        <button onClick={handleGetExercise} key={item.id_exercise} className={styles.section}>
+       state.exercises.map((item,index) =>(
+        <button key={item.id_exercise} className={styles.section}>
               <div className={styles.tag}/>
               <span>{item.name_exercise}</span>
         </button>
