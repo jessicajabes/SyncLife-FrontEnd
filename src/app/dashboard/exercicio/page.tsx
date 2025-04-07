@@ -18,6 +18,7 @@ export default async function Exercice(){
        exercises:response.data,
        token:token,
        modalIsOpen:false,
+       exerciseModal:null,
      }
    
     return(

@@ -1,12 +1,10 @@
 "use client"
 
 import styles from './styles.module.scss'
-import {LucideDelete} from 'lucide-react'
-import {X} from 'lucide-react'
-import {Pen} from 'lucide-react'
 import { useExerciseContext } from '../../context/useExerciseContext'
-import { ExerciseActionTypes } from '../../context/ExerciseActions'
-import { ExerciseModel } from '@/app/models/ExerciseModel'
+import { ExerciseModel } from '@/app/models/ExerciseModel';
+import { ExerciseActionTypes } from '../../context/ExerciseActions';
+
 
 
 
@@ -22,12 +20,16 @@ interface Props{
 
 export function GetExercises(){
 
-    const {state, dispatch} = useExerciseContext();
+    const {state,dispatch} = useExerciseContext();
+
+    async function handleDetailExercise(exercise:ExerciseModel){
+        dispatch({type:ExerciseActionTypes.REQUEST_OPEN_MODAL, payload:exercise});
+    }
   
     return(
         
-       state.exercises.map((item,index) =>(
-        <button key={item.id_exercise} className={styles.section}>
+       state.exercises.map((item) =>(
+        <button key={item.id_exercise} className={styles.section} onClick={()=>handleDetailExercise(item)}>
               <div className={styles.tag}/>
               <span>{item.name_exercise}</span>
         </button>

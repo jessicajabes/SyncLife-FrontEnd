@@ -5,6 +5,7 @@ export enum ExerciseActionTypes {
     PUT_EXERCISE = 'PUT_EXERCISE',
     DELETE_EXERCISE = 'DELETE_EXERCISE',
     CREATE_EXERCISE = 'CREATE EXERCISE',
+    REQUEST_OPEN_MODAL = 'REQUEST_OPEN_MODAL',
   }
 
 type ExerciseActionsWithPayload = 
@@ -16,8 +17,11 @@ type ExerciseActionsWithPayload =
     payload: ExerciseModel;
   }|{    
     type: ExerciseActionTypes.DELETE_EXERCISE;
-    payload: ExerciseModel['id_exercise'];
-  };
+    payload: ExerciseModel;
+    }|{
+    type: ExerciseActionTypes.REQUEST_OPEN_MODAL;
+    payload: ExerciseModel;      
+    };
   
 
 type ExerciseActionsWithoutPayload =

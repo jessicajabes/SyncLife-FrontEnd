@@ -22,6 +22,14 @@ export function exerciseReducer(
                 exercises:[...state.exercises, newExercise]
             }
         }
+        case ExerciseActionTypes.REQUEST_OPEN_MODAL:{
+            const exercise = action.payload;
+            return{
+                ...state,
+                modalIsOpen:true,
+                exerciseModal:exercise
+            }
+        }
         default:
             throw new Error();
     }
