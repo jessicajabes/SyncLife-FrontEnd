@@ -10,7 +10,7 @@ export function PageExercise(){
     const {state, dispatch} = useExerciseContext();
     return(
          <main className={styles.container}>
-                    <FormExercice/>
+                 
                     <GetExercises/>
                     {state.modalIsOpen && <ModalExercise/>}
         </main>

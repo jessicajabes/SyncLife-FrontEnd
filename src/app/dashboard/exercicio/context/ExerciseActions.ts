@@ -1,4 +1,4 @@
-import { ExerciseModel } from "@/app/models/ExerciseModel";
+import { ExerciseModel } from "../../../models/ExerciseModel";
 
 export enum ExerciseActionTypes {
     GET_EXERCISE = 'GET_EXERCISE',
@@ -6,6 +6,8 @@ export enum ExerciseActionTypes {
     DELETE_EXERCISE = 'DELETE_EXERCISE',
     CREATE_EXERCISE = 'CREATE EXERCISE',
     REQUEST_OPEN_MODAL = 'REQUEST_OPEN_MODAL',
+    REQUEST_OPEN_MODAL_CREATE = 'REQUEST_OPEN_MODAL_CREATE',
+    CLOSE_MODAL = 'CLOSE_MODAL'
   }
 
 type ExerciseActionsWithPayload = 
@@ -20,13 +22,15 @@ type ExerciseActionsWithPayload =
     payload: ExerciseModel;
     }|{
     type: ExerciseActionTypes.REQUEST_OPEN_MODAL;
-    payload: ExerciseModel;      
+    payload: ExerciseModel ;      
     };
   
 
 type ExerciseActionsWithoutPayload =
   {
-    type: ExerciseActionTypes.GET_EXERCISE;
+    type: ExerciseActionTypes.CLOSE_MODAL;
+ }|{
+  type: ExerciseActionTypes.REQUEST_OPEN_MODAL_CREATE;
  };
 
 

@@ -1,19 +1,18 @@
 "use client"
 import styles from './styles.module.scss'
-import { api } from '@/services/api'
-import {Button} from '../../../../components/Button'
 import { TextArea } from '../../../../components/TextArea'
-import { Input } from '@/app/components/Input'
+import { Input } from '../../../../components/Input'
 import { useExerciseContext } from '../../context/useExerciseContext'
-import { ExerciseModel } from '@/app/models/ExerciseModel'
 import { ExerciseActionTypes } from '../../context/ExerciseActions'
+import { ExerciseModel } from '@/app/models/ExerciseModel'
 
 
 
 
 export function FormExercice(){
     const {state, dispatch} = useExerciseContext();
-    const token = state.token;
+
+ /*   const token = state.token;
      function handleRegisterExercise(formData: FormData){
         const name = formData.get("name");
         const description = formData.get("description");
@@ -43,15 +42,18 @@ export function FormExercice(){
         }).catch((err)=>{
             console.log(err);
         })       
+    }*/
+    async function handleDetailExercise(){
+        dispatch({type:ExerciseActionTypes.REQUEST_OPEN_MODAL_CREATE});
     }
   
     return(
        <main className={styles.container}>
         <h1>Cadastro de Exercício</h1>
-         <form className={styles.form} action={handleRegisterExercise}>
+         <form className={styles.form}>
             <Input type="text" name="name" placeholder="Nome do Exercício"/>
             <TextArea name="description" placeholder="Escreva a Descrição"/>
-            <Button>Cadastrar</Button>
+            <button onClick={()=>handleDetailExercise()}>Cadastrar</button>
          </form>
          <h1>Exercicíos Cadastrados</h1>
        </main>

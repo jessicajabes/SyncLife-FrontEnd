@@ -1,9 +1,7 @@
 import styles from "./page.module.scss";
-import logoImg from '../../public/Logo.png';
-import Image from 'next/image';
 import Link from "next/link";
 import {redirect} from 'next/navigation';
-import { api } from "@/services/api";
+import { api } from "../services/api";
 import { cookies } from 'next/headers'
 import {Logo} from './components/Logo'
 import { Button } from "./components/Button";

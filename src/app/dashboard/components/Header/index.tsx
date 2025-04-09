@@ -45,9 +45,9 @@ export function Header(){
                 <nav>   
                     <Link href="/dashboard">Treino</Link>
                     <Link href="/dashboard/exercicio">Exercicíos</Link>
-                    <Link href="#" onClick={handleThemeChange}> <SunIcon size={24} color="#FFF"/></Link>
+                    <Link href="#" onClick={handleThemeChange}> <SunIcon size={24} className={styles.sun}/></Link>
                     <form action={handleLogout}>
-                        <button type='submit'><LogOut size={24}  /></button>
+                        <button type='submit'><LogOut size={24} className={styles.logout} /></button>
                     </form>
                 </nav>
              </div>
