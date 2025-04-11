@@ -1,5 +1,4 @@
 import styles from "../page.module.scss";
-import logoImg from '../../../public/Logo.png'
 import Image from 'next/image'
 import Link from "next/link";
 import {api} from '@/services/api'
@@ -7,6 +6,8 @@ import { redirect } from "next/navigation";
 import {Logo} from '../components/Logo'
 import {Button} from '../components/Button'
 import { Input } from '../components/Input'
+import { toast } from 'sonner';
+import { Exception } from "sass";
 
 export default function Signup(){
 
@@ -26,14 +27,14 @@ export default function Signup(){
         password,
         email,
         teacher:true
-      })
-
-    }catch(err){
-      console.log("error")
-      console.log(err)
-    }
-
-    redirect ("/")
+      }).then(()=>{
+      toast.success("Usuário cadastrado com sucesso!");
+      redirect ("/");
+    })}
+    catch(e){
+      toast.error("Erro ao cadastrar usuário");
+      console.log(e);
+    }; 
   }
 
 

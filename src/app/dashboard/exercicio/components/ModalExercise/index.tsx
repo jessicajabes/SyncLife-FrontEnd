@@ -6,14 +6,15 @@ import { ExerciseModel } from '@/app/models/ExerciseModel';
 import { api } from '../../../../../services/api';
 import { ExerciseActionTypes } from '../../context/ExerciseActions';
 import {useState} from 'react'
+import { toast } from 'sonner';
 
 
 export function ModalExercise(){
     const {state,dispatch} = useExerciseContext();
     const exercise = state.exerciseModal;
     const token = state.token;
-    const [name_exercise, setName_exercise] = useState(exercise?.name_exercise);
-    const [description_exercise, setDescription_exercise] = useState(exercise?.description_exercise);
+    const [name_exercise, setName_exercise] = useState(exercise != null? (exercise.name_exercise) : "");
+    const [description_exercise, setDescription_exercise] = useState(exercise != null? (exercise.description_exercise) : "");
 
 
     function handleCloseModal(){
@@ -32,9 +33,12 @@ export function ModalExercise(){
             })     
             .then(()=>{
                 dispatch({type:ExerciseActionTypes.DELETE_EXERCISE, payload:exercise});
+            }).then(()=>{
+                toast.success("Exercício deletado com sucesso!");
             }).catch((err)=>{
+                toast.error("Erro ao deletar exercício");
                 console.log(err);
-            })       
+            })     
         }
 
       
@@ -57,10 +61,13 @@ export function ModalExercise(){
             })     
             .then(()=>{
                 dispatch({type:ExerciseActionTypes.PUT_EXERCISE, payload:putExercise});
+            }).then(()=>{
+                toast.success("Exercício alterado com sucesso!");
             }).catch((err)=>{
+                toast.error("Erro ao alterar exercício");
                 console.log(err);
             }) 
-        }
+        }     
     }
 
     async function handleCreateExercise(){
@@ -86,31 +93,14 @@ export function ModalExercise(){
         })     
         .then(()=>{
             dispatch({type:ExerciseActionTypes.CREATE_EXERCISE, payload:newExercise});
+        }).then(()=>{
+            toast.success("Exercício criado com sucesso!");
         }).catch((err)=>{
+            toast.error("Erro ao criar exercício");
             console.log(err);
         })       
     }
     
-     /* {exercise??(
-                <dialog className={styles.dialogContainer}>
-                <section className={styles.dialogContent}>
-                    <div className={styles.buttonClose}>
-                        <button onClick={()=>handleCloseModal()} className={styles.dialogBack} >
-                            <X className={styles.X} />
-                        </button>
-                    </div>
-                    <form>
-                        <h1>Exercicío:</h1>
-                        <input type='text' onChange={(e)=>setName_exercise(e.target.value)}/>
-                        <h1>Descrição:</h1>
-                        <input type ='text' onChange={(e)=>setDescription_exercise(e.target.value)}/>
-                    </form>
-                    <div className={styles.divButtons}>
-                        <button onClick={()=>handleCreateExercise()}>cadastrar</button>
-                    </div>
-                </section>
-            </dialog>
-        )}*/
 
     return(
         <>
@@ -126,19 +116,19 @@ export function ModalExercise(){
                     <h1>Exercicío:</h1>
                     <input type='text' value={name_exercise} onChange={(e)=>setName_exercise(e.target.value)}/>
                     <h1>Descrição:</h1>
-                    <input type ='text' value={description_exercise} onChange={(e)=>setDescription_exercise(e.target.value)}/>
+                    <textarea  value={description_exercise} onChange={(e)=>setDescription_exercise(e.target.value)}/>
                 </form>
                 {(exercise !== null) ?( 
                 <div className={styles.divButtons}>
-                    <button onClick={()=>handlePutExercise(exercise)}>alterar</button>
-                    <button onClick={()=>handleDeleteExercise(exercise)}>deletar</button>
+                    <button onClick={()=>handlePutExercise(exercise)}>Alterar</button>
+                    <button onClick={()=>handleDeleteExercise(exercise)}>Deletar</button>
                 </div>
                  ):(
                 <div className={styles.divButtons}>
-                        <button onClick={()=>handleCreateExercise()}>cadastrar</button>
+                        <button onClick={()=>handleCreateExercise()}>Cadastrar</button>
                 </div>
 
-                 )};
+                 )}
             </section>
         </dialog>
     

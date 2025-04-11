@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 import {Logo} from './components/Logo'
 import { Button } from "./components/Button";
 import { Input } from "./components/Input";
+import { toast } from 'sonner';
 
 
 export default function Home() {
@@ -37,6 +38,7 @@ export default function Home() {
 
     }catch(err){
       console.log(err);
+      toast.error("Usuário ou senha inválida");
       return;
     }
 

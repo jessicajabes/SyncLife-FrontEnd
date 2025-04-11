@@ -2,7 +2,7 @@
 
 import styles from './styles.module.scss'
 import Link from 'next/link';
-import {LogOut, SunIcon} from 'lucide-react'
+import {LogOut, SunIcon, MoonIcon} from 'lucide-react'
 import { deleteCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import {Logo} from '../../../components/Logo'
@@ -12,13 +12,17 @@ export function Header(){
     const router = useRouter();
     const [theme, setTheme] = useState<'dark'|'light'>('dark');
 
-    function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    const nextIconTheme ={
+        dark: <SunIcon size={24} className={styles.sun}/>,
+        light: <MoonIcon size={24} className={styles.sun}/>,
+    }
 
-    ){
+
+    function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>){
         event?.preventDefault();
-
         setTheme(prevTheme => {
             const nextTheme = prevTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem("theme", nextTheme);
             return nextTheme;
         });
     }
@@ -29,8 +33,10 @@ export function Header(){
     }
 
     useEffect(()=>{
-        document.documentElement.setAttribute('data-theme', theme);
-        
+        const storageTheme = (localStorage.getItem("theme") as "dark"|"light") || 'dark';
+        document.documentElement.setAttribute('data-theme', storageTheme);
+        localStorage.setItem('theme', storageTheme);
+        setTheme(storageTheme);
         return () =>{
             console.log("Atualizando componente")
         }
@@ -45,9 +51,9 @@ export function Header(){
                 <nav>   
                     <Link href="/dashboard">Treino</Link>
                     <Link href="/dashboard/exercicio">Exercicíos</Link>
-                    <Link href="#" onClick={handleThemeChange}> <SunIcon size={24} className={styles.sun}/></Link>
+                    <Link href="#" onClick={handleThemeChange}> {nextIconTheme[theme]}</Link>
                     <form action={handleLogout}>
-                        <button type='submit'><LogOut size={24} className={styles.logout} /></button>
+                        <button type='submit'><LogOut size={24} className={styles.logout}></LogOut></button>
                     </form>
                 </nav>
              </div>
