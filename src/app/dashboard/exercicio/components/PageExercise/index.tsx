@@ -1,7 +1,6 @@
 "use client"
 import styles from './styles.module.scss'
-import { FormExercice } from '../FormExercice';
-import { GetExercises } from '../GetExercicios';
+import { GetExercises } from '../GetExercises';
 import { ModalExercise } from '../ModalExercise';
 import { useExerciseContext } from '../../context/useExerciseContext';
 

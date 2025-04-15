@@ -1,11 +1,11 @@
 "use client"
 import { createContext } from "react";
-import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
+import { ExerciseStateModel } from "@/app/models/ExerciseStateModel";
 import { initialExerciseState } from "./initialExerciseState";
 import { ExerciseActionModel } from "./ExerciseActions";
 
 type ExerciseContextProps = {
-    state: ExerciceStateModel;
+    state: ExerciseStateModel;
     dispatch: React.Dispatch<ExerciseActionModel>;
   };
   

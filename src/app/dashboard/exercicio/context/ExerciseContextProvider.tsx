@@ -3,12 +3,12 @@
 import { useReducer, useEffect } from "react";
 import { ExerciseContext } from "./ExerciseContext";
 import { exerciseReducer } from "./exerciseReducer";
-import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
+import { ExerciseStateModel } from "@/app/models/ExerciseStateModel";
 
 
 type ExerciseContextProviderProps = {
     children: React.ReactNode,
-    exercise: ExerciceStateModel;
+    exercise: ExerciseStateModel;
   };
   
 

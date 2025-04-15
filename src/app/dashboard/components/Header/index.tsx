@@ -49,7 +49,7 @@ export function Header(){
                     <Logo/>
                 </Link>
                 <nav>   
-                    <Link href="/dashboard">Treino</Link>
+                    <Link href="/dashboard/training">Treino</Link>
                     <Link href="/dashboard/exercicio">Exercicíos</Link>
                     <Link href="#" onClick={handleThemeChange}> {nextIconTheme[theme]}</Link>
                     <form action={handleLogout}>

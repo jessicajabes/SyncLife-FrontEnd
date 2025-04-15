@@ -1,13 +1,13 @@
 import { ExerciseModel } from './../../../models/ExerciseModel';
-import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
+import { ExerciseStateModel } from "@/app/models/ExerciseStateModel";
 import { ExerciseActionModel, ExerciseActionTypes } from "./ExerciseActions";
 
 
 export function exerciseReducer(
 
-    state:ExerciceStateModel,
+    state:ExerciseStateModel,
     action: ExerciseActionModel,
-): ExerciceStateModel{
+): ExerciseStateModel{
 
     switch(action.type){
 

@@ -1,7 +1,7 @@
 import { ExerciseModel } from "./ExerciseModel"
 
 
-export type ExerciceStateModel = {
+export type ExerciseStateModel = {
     exercises: ExerciseModel[];
     token: string | null;
     modalIsOpen:boolean;

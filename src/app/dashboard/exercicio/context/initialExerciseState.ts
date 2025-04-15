@@ -1,9 +1,9 @@
 "use server"
-import { ExerciceStateModel } from "@/app/models/ExerciseStateModel";
+import { ExerciseStateModel } from "@/app/models/ExerciseStateModel";
 
 
 
-export const initialExerciseState: ExerciceStateModel = {
+export const initialExerciseState: ExerciseStateModel = {
      exercises: [],
      token: null,
      modalIsOpen:false,

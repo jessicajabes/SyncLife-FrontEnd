@@ -1,12 +1,12 @@
-import { ExerciceStateModel } from '../../models/ExerciseStateModel';
+import { ExerciseStateModel } from '../../models/ExerciseStateModel';
 import { getCookieServer } from '../../../lib/cookieServer';
 import { api } from '../../../services/api';
 import { ExerciseContextProvider } from './context/ExerciseContextProvider';
-import { PageExercise } from './components/PageExercise/PageExercise';
+import { PageExercise } from './components/PageExercise';
 
 
 
-export default async function Exercice(){
+export default async function Exercise(){
      const token = await getCookieServer();
  
      const response = await api.get("/exercise",{
@@ -15,7 +15,7 @@ export default async function Exercice(){
              }
       })
 
-     const exercisesResponse: ExerciceStateModel ={
+     const exercisesResponse: ExerciseStateModel ={
        exercises: response.data,
        token:token,
        modalIsOpen:false,
