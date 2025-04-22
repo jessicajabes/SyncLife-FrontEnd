@@ -5,16 +5,38 @@ import { X } from 'lucide-react'
 import { ExercisesOfTrainingModel } from '@/app/models/ExercisesOfTrainingModel';
 import { api } from '../../../../../services/api';
 import { ExercisesOfTrainingActionTypes } from '../../context/ExercisesOfTrainingActions';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import { toast } from 'sonner';
+import { ExerciseModel } from '@/app/models/ExerciseModel';
 
 
 export function ModalExercisesOfTraining(){
     const {state,dispatch} = useExercisesOfTrainingContext();
     const exercisesoftraining = state.exercisesoftrainingModal;
     const token = state.token;
+    const [exercise_id, setExercise_Id] = useState("");
+    const [exercise, setExercise] = useState([]);
     const [block, setBlock] = useState(exercisesoftraining != null? (exercisesoftraining.block) : 0);
-    const [repeat, setRepeat] = useState(exercisesoftraining != null? (exercisesoftraining.repeat) : 0);
+    const [repeat, setRepeat] = useState(exercisesoftraining != null? (exercisesoftraining.repeat) : "");
+    const [description, setDescription] = useState(exercisesoftraining != null? (exercisesoftraining.description) : "")
+    
+    
+
+
+    useEffect(() => {
+        if (exercisesoftraining?.exercise?.id_exercise && state.exercises.length > 0) {
+          const matched = state.exercises.find(
+            (item) => item.id_exercise === exercisesoftraining.exercise_id
+          );
+          if (matched) {
+            setExercise_Id(String(matched.id_exercise));
+            console.log("matched", matched)
+           // setExercise(matched);
+          }
+        }
+      }, [exercisesoftraining, state.exercises]);
+
+    
 
 
     function handleCloseModal(){
@@ -22,7 +44,7 @@ export function ModalExercisesOfTraining(){
     }
 
 
-   /* async function handleDeleteExercisesOfTraining(exercisesoftraining: ExercisesOfTrainingModel){
+    async function handleDeleteExercisesOfTraining(exercisesoftraining: ExercisesOfTrainingModel){
     await api.delete("/exercisesoftraining",{
                 headers:{
                     Authorization: `Bearer ${token}`
@@ -41,17 +63,21 @@ export function ModalExercisesOfTraining(){
             })     
         }
 
-      */
+      
   
-  /*  async function handlePutExercisesOfTraining(exercisesoftraining: ExercisesOfTrainingModel){
-        console.log("handle",name_exercisesoftraining,setName_exercisesoftraining);
-        if((name_exercisesoftraining && description_exercisesoftraining)){
+    async function handlePutExercisesOfTraining(exercisesoftraining: ExercisesOfTrainingModel){
+        if((block && repeat)){
             const putExercisesOfTraining: ExercisesOfTrainingModel = {
                 id_exerciseoftraining:exercisesoftraining.id_exerciseoftraining,
-                name_exercisesoftraining: name_exercisesoftraining,
-                description_exercisesoftraining: description_exercisesoftraining,
+                block: block,
+                exercise_id:exercisesoftraining.exercise_id,
+                training_id:exercisesoftraining.training_id,
+                repeat: repeat,
+                description: exercisesoftraining.description,
                 created_at:exercisesoftraining.created_at,
                 update_at:Date.now(),
+                training:exercisesoftraining.training,
+                exercise:exercisesoftraining.exercise,
             };
             console.log("PUT EXERCISESOFTRAINING",putExercisesOfTraining)
             await api.put("/exercisesoftraining", putExercisesOfTraining, {
@@ -68,19 +94,23 @@ export function ModalExercisesOfTraining(){
                 console.log(err);
             }) 
         }     
-    }*/
+    }
 
-   /* async function handleCreateExercisesOfTraining(){
-        if(name_exercisesoftraining==="" || description_exercisesoftraining ==="" || !name_exercisesoftraining || !description_exercisesoftraining){
+    async function handleCreateExercisesOfTraining(){
+        if(exercise_id==="" || repeat ==="" || block ===0 || !exercise_id || !repeat || !block || !exercisesoftraining?.training_id){
             return;
         }
 
         const newExercisesOfTraining: ExercisesOfTrainingModel = {
-            id_exercisesoftraining:"",
-            name_exercisesoftraining: name_exercisesoftraining,
-            description_exercisesoftraining: description_exercisesoftraining,
+            id_exerciseoftraining:"",
+            training_id:exercisesoftraining?.training_id,
+            exercise_id: exercise_id,
+            block: block,
+            repeat:repeat,
+            description:description,
             created_at:Date.now(),
             update_at:Date.now(),
+            training: exercisesoftraining.training,
         };
         console.log(newExercisesOfTraining);
         api.post("/exercisesoftraining",newExercisesOfTraining,{
@@ -89,7 +119,7 @@ export function ModalExercisesOfTraining(){
               }
         }).then(response =>{
             const {data}=response;
-            newExercisesOfTraining.id_exercisesoftraining=data.id_exercisesoftraining;
+            newExercisesOfTraining.id_exerciseoftraining=data.id_exerciseoftraining;
         })     
         .then(()=>{
             dispatch({type:ExercisesOfTrainingActionTypes.CREATE_EXERCISESOFTRAINING, payload:newExercisesOfTraining});
@@ -100,7 +130,9 @@ export function ModalExercisesOfTraining(){
             console.log(err);
         })       
     }
-    */
+    
+
+
 
     return(
         <>
@@ -113,10 +145,18 @@ export function ModalExercisesOfTraining(){
                     </button>
                 </div>
                 <form>
-                    <h1>Exercicío:</h1>
-                    <input type='text' value={name_exercisesoftraining} onChange={(e)=>setName_exercisesoftraining(e.target.value)}/>
-                    <h1>Descrição:</h1>
-                    <textarea  value={description_exercisesoftraining} onChange={(e)=>setDescription_exercisesoftraining(e.target.value)}/>
+                    <select value={exercise_id} onChange={(e)=>setExercise_Id(e.target.value)}>
+                        {state.exercises.map((item,index)=>
+                            <option key={item.id_exercise} value={item.id_exercise}>{item.name_exercise}</option>
+                        )}
+                    </select>
+                    <h2>Séries:    </h2>
+                    <input type='number' value={block} onChange={(e)=>setBlock(e.target.valueAsNumber)}/>
+                    <h2>Repetições: </h2>
+                    <input type='text' value={repeat} onChange={(e)=>setRepeat(e.target.value)}/>
+                    <h2>Observação: </h2>
+                    <input type='text' value={description} onChange={(e)=>setDescription(e.target.value)}/>                    
+
                 </form>
                 {(exercisesoftraining !== null) ?( 
                 <div className={styles.divButtons}>

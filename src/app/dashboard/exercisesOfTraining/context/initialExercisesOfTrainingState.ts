@@ -8,5 +8,6 @@ export const initialExercisesOfTraining: ExercisesOfTrainingStateModel = {
      token: null,
      modalIsOpen:false,
      exercisesoftrainingModal:null,
+     exercises:[],
     };
 

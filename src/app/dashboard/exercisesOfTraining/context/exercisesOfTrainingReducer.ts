@@ -27,13 +27,17 @@ export function exercisesoftrainingReducer(
             return{
                 ...state,
                 modalIsOpen:true,
-                exercisesoftrainingModal:exercisesoftraining
+                exercisesoftrainingModal:exercisesoftraining.exercisesOfTraining,
+                exercises:exercisesoftraining.exercises,
             }
         }
         case ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL_CREATE:{
+            const exercisesoftraining = action.payload;
             return{
                 ...state,
                 modalIsOpen:true,
+                exercises:exercisesoftraining,
+
             }
         }
         case ExercisesOfTrainingActionTypes.DELETE_EXERCISESOFTRAINING:{

@@ -1,4 +1,5 @@
 import { ExercisesOfTrainingModel } from "../../../models/ExercisesOfTrainingModel";
+import { ExerciseModel } from "@/app/models/ExerciseModel";
 
 export enum ExercisesOfTrainingActionTypes {
     GET_EXERCISESOFTRAINING = 'GET_EXERCISESOFTRAINING',
@@ -22,15 +23,19 @@ type ExercisesOfTrainingActionsWithPayload =
     payload: ExercisesOfTrainingModel;
     }|{
     type: ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL;
-    payload: ExercisesOfTrainingModel ;      
-    };
+    payload: {
+      exercisesOfTraining: ExercisesOfTrainingModel;
+      exercises: ExerciseModel[];
+    }}|{
+      type: ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL_CREATE;
+      payload: ExerciseModel[];
+     };      
+  
   
 
 type ExercisesOfTrainingActionsWithoutPayload =
   {
     type: ExercisesOfTrainingActionTypes.CLOSE_MODAL;
- }|{
-  type: ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL_CREATE;
  };
 
 

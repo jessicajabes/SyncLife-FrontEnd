@@ -1,3 +1,4 @@
+import { ExerciseModel } from './ExerciseModel';
 import { ExercisesOfTrainingModel } from './ExercisesOfTrainingModel';
 
 
@@ -6,4 +7,5 @@ export type ExercisesOfTrainingStateModel = {
     token: string | null;
     modalIsOpen:boolean;
     exercisesoftrainingModal:ExercisesOfTrainingModel|null;
+    exercises:ExerciseModel[];
 }

@@ -12,5 +12,5 @@ export type ExercisesOfTrainingModel ={
     exercise_id: string;
     training_id: string;
     training:TrainingModel;
-    exercise:ExerciseModel;
+    exercise?:ExerciseModel;
 }

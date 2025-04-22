@@ -6,6 +6,8 @@ import { ExercisesOfTrainingModel } from '../../../../models/ExercisesOfTraining
 import { ExercisesOfTrainingActionTypes } from '../../context/ExercisesOfTrainingActions';
 import { PlusCircleIcon } from 'lucide-react';
 import {useState} from 'react'
+import { ExerciseModel } from '@/app/models/ExerciseModel';
+import { api } from '@/services/api';
 
 
 
@@ -17,12 +19,32 @@ export function GetExercisesOfTrainingsOfTraining(){
     const [block, setBlock] = useState(exercisesoftraining != null? (exercisesoftraining.block) : 0);
     const [repeat, setRepeat] = useState(exercisesoftraining != null? (exercisesoftraining.repeat) : 0);
 
+    async function getExercises (){
+      const responseExercise = await api.get("/exercise",{
+        headers:{
+              Authorization: `Bearer ${token}`
+            }
+       })
+      const simplifiedExercises = responseExercise.data.map((exercise: ExerciseModel) => ({
+        id_exercise: exercise.id_exercise,
+        name_exercise: exercise.name_exercise,
+      }));     
+      console.log("Simplified Exercises",{simplifiedExercises})
+      return simplifiedExercises; 
+    }
+
     async function handleDetailExercisesOfTraining(exercisesoftraining:ExercisesOfTrainingModel){
-        console.log(exercisesoftraining);
-        dispatch({type:ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL, payload:exercisesoftraining});
+        const exercises = await getExercises();
+        console.log("exercises",{exercises})
+        dispatch({type:ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL, payload:{
+          exercisesOfTraining: exercisesoftraining,
+          exercises: exercises,
+        }
+      });
     }
     async function handleDetailExercisesOfTrainingCreate(){
-        dispatch({type:ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL_CREATE});
+        const exercises = await getExercises();
+        dispatch({type:ExercisesOfTrainingActionTypes.REQUEST_OPEN_MODAL_CREATE, payload:exercises });
     }
   //            
     return(
@@ -31,16 +53,17 @@ export function GetExercisesOfTrainingsOfTraining(){
       <button className={styles.buttonAdd} onClick={()=>handleDetailExercisesOfTrainingCreate()}><PlusCircleIcon className={styles.add}/></button>
       <div className={styles.exercisesoftrainingsoftraining}>
       {state.exercisesoftraining.map((item,index) =>(
-        <div className={styles.blockExercises} key={item.id_exerciseoftraining}>
-             <span className={styles.nameExercise}>{item.exercise.name_exercise}</span>
-             <h1>Séries:    </h1>
-             <input type='number' value={item.block} />
-             <h1>Repetições: </h1>
-             <input type='text' value={item.repeat} />
-             <h1>Observação: </h1>
-             <input type='text' value={item.description} />
+        <button className={styles.blockExercises} key={item.id_exerciseoftraining} onClick={()=>handleDetailExercisesOfTraining(item)}>
+             <h2 className={styles.nameExercise}>{item.exercise.name_exercise}</h2>
+             <h2>Séries:  {item.block}  </h2>
+
+             <h2>Repetições: {item.repeat} </h2>
+
+             <h2>Observação: {item.description} </h2>
+
+
              
-        </div>
+        </button>
        ))}
        </div>
     </section>

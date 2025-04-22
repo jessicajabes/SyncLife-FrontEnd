@@ -3,7 +3,7 @@ import { getCookieServer } from '../../../lib/cookieServer';
 import { api } from '../../../services/api';
 import { ExercisesOfTrainingContextProvider } from './context/ExercisesOfTrainingContextProvider';
 import { PageExercisesOfTraining } from './components/PageExercisesOfTraining';
-
+import { ExerciseModel } from '@/app/models/ExerciseModel';
 
 
 export default async function ExercisesOfTraining(training_id:string){
@@ -23,8 +23,9 @@ export default async function ExercisesOfTraining(training_id:string){
        token:token,
        modalIsOpen:false,
        exercisesoftrainingModal:null,
+       exercises: [],
      }
-     console.log("PAGE",exercisesoftrainingsoftrainingResponse)
+
    
     return(
       <ExercisesOfTrainingContextProvider exercisesoftraining={exercisesoftrainingsoftrainingResponse}>
