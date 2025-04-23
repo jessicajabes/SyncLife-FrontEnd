@@ -12,12 +12,13 @@ import { Exception } from "sass";
 export default function Signup(){
 
   async function handleRegister(formData: FormData){
-   "use server"
-    const name = formData.get("name")
-    const email = formData.get("email")
-    const password = formData.get("password")
+
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     if (name ==="" || email === "" || password ===""){
+      toast.error("Por favor, preencha todos os campos.")
       return;
     }
 
@@ -27,10 +28,10 @@ export default function Signup(){
         password,
         email,
         teacher:true
-      }).then(()=>{
+      });
       toast.success("Usuário cadastrado com sucesso!");
       redirect ("/");
-    })}
+    }
     catch(e){
       toast.error("Erro ao cadastrar usuário");
       console.log(e);
